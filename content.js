@@ -1,6 +1,8 @@
+// 存储设置的键
+const setArr = ['bgColor', 'sidebarColor', 'inputBgColor', 'fontFamily', 'showButtons', 'activeTheme', 'bgImageMode', 'activeTab', "questionFontColor", "answerFontColor"]
 // 从存储中加载保存的设置并应用
 // 修改初始加载逻辑，从local存储中获取bgImage
-chrome.storage.sync.get(['bgColor', 'sidebarColor', 'inputBgColor', 'fontFamily', 'bgImageMode', 'activeTab'], function (syncSettings) {
+chrome.storage.sync.get(setArr, function (syncSettings) {
     chrome.storage.local.get(['bgImage'], function (localSettings) {
         // 合并两个存储的设置
         const mergedSettings = { ...syncSettings, ...localSettings };
@@ -9,35 +11,35 @@ chrome.storage.sync.get(['bgColor', 'sidebarColor', 'inputBgColor', 'fontFamily'
 });
 
 // 监听来自popup的消息
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    if (request.type === 'updateStyle') {
-        updateStyle(request.key, request.value);
-    }
-});
+// chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+//     if (request.type === 'updateStyle') {
+//         updateStyle(request.key, request.value);
+//     }
+// });
 
 // 更新页面样式
-function updateStyle(key, value) {
-    switch (key) {
-        case 'bgColor':
-            document.body.style.backgroundColor = value;
-            break;
-        case 'sidebarColor':
-            const sidebar = document.querySelector('.sidebar');
-            if (sidebar) sidebar.style.backgroundColor = value;
-            break;
-        case 'fontFamily':
-            document.body.style.fontFamily = value;
-            break;
-        case 'questionFontColor':
-            document.body.style.fontFamily = value;
-            break;
-        case 'answerFontColor':
-            // 移除无效代码并添加强制样式
-            const paragraphs = document.querySelectorAll('p');
-            paragraphs.forEach(p => p.style.setProperty('color', value, 'important'));
-            break;
-    }
-}
+// function updateStyle(key, value) {
+//     switch (key) {
+//         case 'bgColor':
+//             document.body.style.backgroundColor = value;
+//             break;
+//         case 'sidebarColor':
+//             const sidebar = document.querySelector('.sidebar');
+//             if (sidebar) sidebar.style.backgroundColor = value;
+//             break;
+//         case 'fontFamily':
+//             document.body.style.fontFamily = value;
+//             break;
+//         case 'questionFontColor':
+//             document.body.style.fontFamily = value;
+//             break;
+//         case 'answerFontColor':
+//             // 移除无效代码并添加强制样式
+//             const paragraphs = document.querySelectorAll('p');
+//             paragraphs.forEach(p => p.style.setProperty('color', value, 'important'));
+//             break;
+//     }
+// }
 
 // 创建和更新样式
 function updateStyle(settings) {
@@ -98,6 +100,22 @@ function updateStyle(settings) {
         .intercom-lightweight-app-launcher,
         .intercom-lightweight-app-gradient {
             display: none !important;
+        }
+
+        p {
+            color: ${settings.answerFontColor || '#ffffff'}!important;
+        }
+
+        h3 {
+            color: ${settings.answerFontColor || '#ffffff'}!important;
+        }
+
+         h4 {
+            color: ${settings.answerFontColor || '#ffffff'}!important;
+        }
+
+        .fbb737a4 {
+            color: ${settings.questionFontColor || '#ffffff'}!important;
         }
     `;
 
@@ -186,7 +204,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             updateStyle(message.settings);
         } else {
             // 处理单个设置更新的情况
-            chrome.storage.sync.get(['bgColor', 'sidebarColor', 'inputBgColor', 'fontFamily', 'bgImage', 'bgImageMode'], function (settings) {
+            chrome.storage.sync.get(setArr, function (settings) {
                 settings[message.key] = message.value;
                 updateStyle(settings);
             });
@@ -227,7 +245,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 // 确保样式在页面加载和动态内容更新时都能应用
 function initializeStyles() {
     // 从sync存储中获取基本设置
-    chrome.storage.sync.get(['bgColor', 'sidebarColor', 'inputBgColor', 'fontFamily', 'bgImageMode', 'activeTab'], function (settings) {
+    chrome.storage.sync.get(setArr, function (settings) {
         // 从local存储中获取图片数据
         chrome.storage.local.get(['bgImage'], function (localSettings) {
             // 合并两个存储的设置

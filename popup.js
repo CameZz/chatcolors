@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', async function () {
   const localImageInput = document.getElementById('localImage');
   const imagePreview = document.getElementById('imagePreview');
   const previewImg = document.getElementById('previewImg');
-  const questionFontColor = $('#questionFontColor');
-  const answerFontColor = $('#answerFontColor');
+  const questionFontColor = document.getElementById('questionFontColor');
+  const answerFontColor = document.getElementById('answerFontColor');
 
   // 重置所有设置的默认值
   const defaultSettings = {
@@ -46,7 +46,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     fontFamily: 'system-ui',
     showButtons: false,
     bgImageMode: 'cover',
-    activeTab: 'preset'
+    activeTab: 'preset',
+    answerFontColor: '#000000',
+    questionFontColor: '#000000'
   };
 
   // 重置所有设置按钮点击事件
@@ -62,6 +64,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     fontFamilySelect.value = defaultSettings.fontFamily;
     showButtonsToggle.checked = defaultSettings.showButtons;
     bgImageMode.value = defaultSettings.bgImageMode;
+    answerFontColor.value = defaultSettings.answerFontColor;
+    questionFontColor.value = defaultSettings.questionFontColor;
     bgImageInput.value = '';
     imagePreview.style.display = 'none';
 
@@ -303,8 +307,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         imagePreview.style.display = 'block';
       }
       if (result.bgImageMode) bgImageMode.value = result.bgImageMode;
-      if (result.questionFontColor) bgImageMode.value = result.bgImageMode;
-      if (result.answerFontColor) bgImageMode.value = result.bgImageMode;
+      if (result.questionFontColor) questionFontColor.value = result.questionFontColor;
+      if (result.answerFontColor) answerFontColor.value = result.answerFontColor;
 
       // 根据保存的标签页状态切换到相应的标签页
       if (result.activeTab) {
