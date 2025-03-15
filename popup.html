@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="jQuery/jquery-3.7.1.min.js"></script>
+  <script src="popup.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/popup.css">
+</head>
+
+<body>
+  <div class="control-group">
+    <label>主题选择</label>
+    <div class="theme-selector">
+      <div class="theme-category">
+        <h3>白天主题</h3>
+        <div class="theme-grid">
+          <div class="theme-item" data-theme="light1"
+            style="background: linear-gradient(45deg, #ffffff 50%, #f5f5f5 50%)"></div>
+          <div class="theme-item" data-theme="light2"
+            style="background: linear-gradient(45deg, #f0f2f5 50%, #e6e8eb 50%)"></div>
+          <div class="theme-item" data-theme="light3"
+            style="background: linear-gradient(45deg, #f8f9fa 50%, #e9ecef 50%)"></div>
+          <div class="theme-item" data-theme="light4"
+            style="background: linear-gradient(45deg, #ffffff 50%, #edf2f7 50%)"></div>
+        </div>
+      </div>
+      <div class="theme-category">
+        <h3>黑夜主题</h3>
+        <div class="theme-grid">
+          <div class="theme-item" data-theme="dark1"
+            style="background: linear-gradient(45deg, #1a1a1a 50%, #2d2d2d 50%)"></div>
+          <div class="theme-item" data-theme="dark2"
+            style="background: linear-gradient(45deg, #2c2c2c 50%, #3d3d3d 50%)"></div>
+          <div class="theme-item" data-theme="dark3"
+            style="background: linear-gradient(45deg, #1e1e1e 50%, #2f2f2f 50%)"></div>
+          <div class="theme-item" data-theme="dark4"
+            style="background: linear-gradient(45deg, #242424 50%, #363636 50%)"></div>
+        </div>
+      </div>
+      <div class="theme-category">
+        <h3>跟随系统</h3>
+        <div class="theme-grid">
+          <div class="theme-item" data-theme="system1"
+            style="background: linear-gradient(45deg, #ffffff 50%, #1a1a1a 50%)"></div>
+          <div class="theme-item" data-theme="system2"
+            style="background: linear-gradient(45deg, #f5f5f5 50%, #2d2d2d 50%)"></div>
+          <div class="theme-item" data-theme="system3"
+            style="background: linear-gradient(45deg, #f0f2f5 50%, #2c2c2c 50%)"></div>
+          <div class="theme-item" data-theme="system4"
+            style="background: linear-gradient(45deg, #f8f9fa 50%, #1e1e1e 50%)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label>主背景颜色</label>
+    <div class="color-control">
+      <input type="color" id="bgColor" />
+      <button class="confirm-btn" id="bgColorConfirm">确定</button>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label>侧边栏背景颜色</label>
+    <div class="color-control">
+      <input type="color" id="sidebarColor" />
+      <button class="confirm-btn" id="sidebarColorConfirm">确定</button>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label>聊天底板颜色</label>
+    <div class="color-control">
+      <input type="color" id="inputBgColor" />
+      <button class="confirm-btn" id="inputBgColorConfirm">确定</button>
+    </div>
+  </div>
+
+  <div class="color-group-wrapper">
+    <div class="control-group inline-group">
+      <label>字体颜色-问</label>
+      <div class="color-control">
+        <input type="color" id="questionFontColor" />
+        <button class="confirm-btn" id="questionFontColorConfirm">确定</button>
+      </div>
+    </div>
+
+    <div class="control-group inline-group">
+      <label>字体颜色-答</label>
+      <div class="color-control">
+        <input type="color" id="answerFontColor" />
+        <button class="confirm-btn" id="answerFontColorConfirm">确定</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label>字体选择</label>
+    <select id="fontFamily">
+      <option value="Arial">Arial</option>
+      <option value="Helvetica">Helvetica</option>
+      <option value="Times New Roman">Times New Roman</option>
+      <option value="Microsoft YaHei">微软雅黑</option>
+      <option value="SimSun">宋体</option>
+      <option value="KaiTi">楷体</option>
+    </select>
+  </div>
+
+  <div class="control-group">
+    <label>背景图片设置</label>
+    <div class="bg-image-tabs">
+      <button class="tab-btn active" data-tab="preset">预设图片</button>
+      <button class="tab-btn" data-tab="custom">自定义图片</button>
+    </div>
+    <div class="tab-content" id="presetTab">
+      <div class="preset-images" id="presetImages">
+        <!-- 预设图片将通过JavaScript动态加载 -->
+      </div>
+    </div>
+    <div class="tab-content" id="customTab" style="display: none;">
+      <div class="bg-image-control">
+        <input type="text" id="bgImage" placeholder="输入图片URL" class="bg-image-input" />
+        <input type="file" id="localImage" accept="image/*" style="display: none;" />
+        <button class="confirm-btn" id="localImageBtn">选择本地图片</button>
+      </div>
+      <div class="image-preview" id="imagePreview" style="display: none;">
+        <img id="previewImg" src="" alt="预览" />
+      </div>
+      <div class="bg-image-options">
+        <select id="bgImageMode" class="bg-image-mode">
+          <option value="cover">填充</option>
+          <option value="contain">适应</option>
+          <option value="repeat">平铺</option>
+          <option value="center">居中</option>
+        </select>
+        <button class="confirm-btn" id="bgImageConfirm">应用</button>
+        <button class="clear-btn" id="clearBgImage">清除背景</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="control-group">
+    <label>按钮显示控制</label>
+    <div class="switch-control">
+      <label class="switch">
+        <input type="checkbox" id="showButtons" checked>
+        <span class="slider round"></span>
+      </label>
+      <span class="switch-label">显示返回按钮</span>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label>插件开关</label>
+    <div class="switch-control">
+      <label class="switch">
+        <input type="checkbox" id="pluginSwitch" checked>
+        <span class="slider round"></span>
+      </label>
+      <span class="switch-label">启用插件</span>
+      <button class="reset-btn" id="resetAll">重置所有设置</button>
+    </div>
+  </div>
+</body>
+
+</html>

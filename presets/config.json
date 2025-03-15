@@ -1,0 +1,24 @@
+{
+  "presetImages": [
+    {
+      "name": "默认山水",
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+      "thumbnail": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=200"
+    },
+    {
+      "name": "城市夜景",
+      "url": "https://images.unsplash.com/photo-1519501025264-65ba15a82390",
+      "thumbnail": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=200"
+    },
+    {
+      "name": "极光",
+      "url": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7",
+      "thumbnail": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=200"
+    },
+    {
+      "name": "樱花",
+      "url": "https://images.unsplash.com/photo-1522383225653-ed111181a951",
+      "thumbnail": "https://images.unsplash.com/photo-1522383225653-ed111181a951?w=200"
+    }
+  ]
+}

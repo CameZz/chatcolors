@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "DeepSeek Chat Customizer",
+  "version": "1.0",
+  "description": "自定义DeepSeek Chat界面样式的Chrome扩展",
+  "permissions": ["activeTab", "storage"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [{
+    "matches": ["https://chat.deepseek.com/*"],
+    "js": ["content.js"]
+  }]
+}
